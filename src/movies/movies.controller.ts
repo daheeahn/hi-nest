@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { Movie } from './entities/movie.entity';
+import { CreateMovieDto } from 'src/dto/create-movie.dto';
 
 @Controller('movies')
 export class MoviesController {
@@ -31,23 +32,24 @@ export class MoviesController {
   // }
 
   @Get(':id')
-  getOne(@Param('id') id: string): Movie {
+  getOne(@Param('id') id: number): Movie {
     // id: string은 movieId: string여도 상관없다.
-    return this.moviesService.getOne(id);
+    //
+    return this.moviesService.getOne(+id);
   }
 
   @Post()
-  create(@Body() movieData) {
+  create(@Body() movieData: CreateMovieDto) {
     this.moviesService.create(movieData);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.moviesService.deleteOne(id);
   }
 
   @Patch(':id')
-  patch(@Param('id') id: string, @Body() updateData) {
+  patch(@Param('id') id: number, @Body() updateData) {
     // put은 모든 리소스를 업데이트, patch는 일부 리소스만 업데이트
     // JSON을 리턴할 수 있다. (express.js에서는 설정이 필요했음)
     // return {
