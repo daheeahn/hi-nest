@@ -11,6 +11,7 @@ import {
 import { MoviesService } from './movies.service';
 import { Movie } from './entities/movie.entity';
 import { CreateMovieDto } from 'src/dto/create-movie.dto';
+import { UpdateMovieDto } from 'src/dto/update-movie.dto';
 
 @Controller('movies')
 export class MoviesController {
@@ -49,7 +50,7 @@ export class MoviesController {
   }
 
   @Patch(':id')
-  patch(@Param('id') id: number, @Body() updateData) {
+  patch(@Param('id') id: number, @Body() updateData: UpdateMovieDto) {
     // put은 모든 리소스를 업데이트, patch는 일부 리소스만 업데이트
     // JSON을 리턴할 수 있다. (express.js에서는 설정이 필요했음)
     // return {
