@@ -50,9 +50,10 @@ export class MoviesController {
   patch(@Param('id') id: string, @Body() updateData) {
     // put은 모든 리소스를 업데이트, patch는 일부 리소스만 업데이트
     // JSON을 리턴할 수 있다. (express.js에서는 설정이 필요했음)
-    return {
-      updatedMovie: id,
-      ...updateData,
-    };
+    // return {
+    //   updatedMovie: id,
+    //   ...updateData,
+    // };
+    return this.moviesService.update(id, updateData);
   }
 }
